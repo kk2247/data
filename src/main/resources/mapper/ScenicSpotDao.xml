@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kyka.data.dao.ScenicSpotDao">
+    <select id="getAllScenicSpot" resultType="com.kyka.data.entity.ScenicSpot">
+        select id,name,welcome,introduce,relax,toilet from scenic_spot order by welcome
+    </select>
+
+
+    <select id="getScenicSpotByDescription" resultType="com.kyka.data.entity.ScenicSpot">
+        select id,name,welcome,introduce,relax,toilet
+        from scenic_spot
+        where introduce like concat('%',#{description},'%')
+        or name=#{description}
+    </select>
+
+    <select id="getScenicSpotByName" resultType="com.kyka.data.entity.ScenicSpot">
+        select id,name,welcome,introduce,relax,toilet
+        from scenic_spot
+        where name=#{name}
+    </select>
+
+    <select id="getScenicSpotById" resultType="com.kyka.data.entity.ScenicSpot">
+        select id,name,welcome,introduce,relax,toilet
+        from scenic_spot
+        where id=#{id}
+    </select>
+
+    <insert id="insertScenicSpot" parameterType="com.kyka.data.entity.ScenicSpot" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" >
+        insert into scenic_spot
+        (name,welcome,introduce,relax,toilet)
+        values
+        (#{name},#{welcome},#{introduce},#{relax},#{toilet})
+    </insert>
+
+    <delete id="deleteScenicSpot">
+        delete from
+        scenic_spot
+        where id=#{id}
+    </delete>
+
+    <update id="modifyScenicSpot" parameterType="com.kyka.data.entity.ScenicSpot">
+        update scenic_spot
+        <set>
+            <if test="id!=null">id=#{id},</if>
+            <if test="name!=null">name=#{name},</if>
+            <if test="welcome!=null">welcome=#{welcome},</if>
+            <if test="introduce!=null">introduce=#{introduce},</if>
+            <if test="relax!=null">relax=#{relax},</if>
+            <if test="toilet!=null">toilet=#{toilet}</if>
+        </set>
+        where
+        id=#{id}
+    </update>
+</mapper>

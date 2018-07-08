@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kyka.data.dao.LineDao">
+    <select id="getAllLine" resultType="com.kyka.data.entity.Line">
+        select id,length,side_name1,side_name2  from line order by id
+    </select>
+
+    <select id="getLineById" resultType="com.kyka.data.entity.Line">
+        select id,length,side_name1,side_name2
+        from line
+        where id=#{id}
+    </select>
+
+    <insert id="insertLine" parameterType="com.kyka.data.entity.Line" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" >
+        insert into line
+        (length,side_name1,side_name2)
+        values
+        (#{length},#{sideName1},#{sideName2})
+    </insert>
+
+    <delete id="deleteLine">
+        delete from
+        line
+        where id=#{id}
+    </delete>
+
+    <update id="modifyLine" parameterType="com.kyka.data.entity.Line">
+        update line
+        <set>
+            <if test="id!=null">id=#{id},</if>
+            <if test="length!=null">length=#{length},</if>
+            <if test="sideName1!=null">side_name1=#{sideName1},</if>
+            <if test="sideName2!=null">side_name2=#{sideName2}</if>
+        </set>
+        where
+        id=#{id}
+    </update>
+</mapper>
