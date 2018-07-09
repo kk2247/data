@@ -11,6 +11,9 @@ public class Car {
     //在车库中的位置
     private int id;
 
+    //在等候队列中的位置
+    private int waitingId;
+
 
     public Car() {
     }
@@ -29,5 +32,21 @@ public class Car {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getWaitingId() {
+        return waitingId;
+    }
+
+    public void setWaitingId(int waitingId) {
+        this.waitingId = waitingId;
     }
 }

@@ -2,8 +2,10 @@ package com.kyka.data.service.impl;
 
 
 import com.kyka.data.dao.LineDao;
+import com.kyka.data.dao.ManagerDao;
 import com.kyka.data.dao.ScenicSpotDao;
 import com.kyka.data.entity.Line;
+import com.kyka.data.entity.Manager;
 import com.kyka.data.entity.ScenicSpot;
 import com.kyka.data.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import java.util.List;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
+
+    @Autowired
+    private ManagerDao managerDao;
 
     @Autowired
     private ScenicSpotDao scenicSpotDao;
@@ -126,5 +131,12 @@ public class ManagerServiceImpl implements ManagerService {
     public void publish(){
 
     }
+
+    @Override
+    public Manager login(Manager manager) {
+        Manager manager1=managerDao.login(manager);
+        return manager1;
+    }
+
 
 }

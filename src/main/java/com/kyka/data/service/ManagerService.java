@@ -1,6 +1,7 @@
 package com.kyka.data.service;
 
 import com.kyka.data.entity.Line;
+import com.kyka.data.entity.Manager;
 import com.kyka.data.entity.ScenicSpot;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface ManagerService {
     List<ScenicSpot> getScenicSpots();
     List<Line> getLines();
     void publish();
+    Manager login(Manager manager);
 }

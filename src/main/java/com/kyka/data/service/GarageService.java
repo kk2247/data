@@ -4,5 +4,7 @@ import com.kyka.data.entity.Car;
 
 public interface GarageService {
     boolean getIn(Car car);
-    boolean getOut(int licenseNum);
+    boolean getOut(String licenseNum);
+    void createGarage();
+    int getInformation();
 }
