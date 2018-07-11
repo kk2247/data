@@ -7,16 +7,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <%
-        String userName="";
-        Cookie[] cookies=request.getCookies();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("account")){
-                userName=cookie.getValue();
-            }
-        }
-        List<ScenicSpot> scenicSpots= (List<ScenicSpot>) request.getAttribute("scenic");
-    %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manager controller</title>
@@ -37,12 +27,12 @@
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Hello!<%=userName%></span>
+                    <span class="sr-only">Dream</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=userName%></a>
+                <a class="navbar-brand" href="managerIndex.jsp"></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -62,31 +52,6 @@
                                 <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
                             </a>
                         </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
                                 <strong>Read All Messages</strong>
@@ -119,29 +84,26 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <table style="border: white">
-                <tr>
-                    <td>name</td>
-                    <td>population</td>
-                    <td>relax</td>
-                    <td>toilet</td>
-                    <td>introduce</td>
-                </tr>
-                <c:forEach items="${scenic}" var="list">
+            <form action="addScenic" method="post">
+                <table style="border: white">
                     <tr>
-                        <td>${list.name}</td>
-                        <td>${list.welcome}</td>
-                        <td>${list.relax}</td>
-                        <td>${list.toilet}</td>
-                        <td>${list.introduce}</td>
-                        <td><a href="http://127.0.0.1:8080/data/delete/${list.id}"> delete</a></td>
-                        <td><a href="http://127.0.0.1:8080/data/change/${list.id}"> modify</a></td>
+                        <td>name</td>
+                        <td>population</td>
+                        <td>relax</td>
+                        <td>toilet</td>
+                        <td>introduce</td>
                     </tr>
-                </c:forEach>
-                <tr>
-                    <a href="http://127.0.0.1:8080/data/add">add</a>
-                </tr>
-            </table>
+                    <tr>
+                        <td><input  type="text" name="name"/></td>
+                        <td><input type="text" name="welcome" /></td>
+                        <td><input  type="text" name="relax"/></td>
+                        <td><input  type="text" name="toilet"/></td>
+                        <td><input type="text" name="introduce"/></td>
+                    </tr>
+                    <tr><button type="submit">submit</button></tr>
+                </table>
+            </form>
+
 
         </div>
         <!-- /. PAGE WRAPPER  -->

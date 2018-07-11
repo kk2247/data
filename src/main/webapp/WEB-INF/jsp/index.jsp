@@ -57,7 +57,7 @@ http://www.templatemo.com/tm-490-comila
 					<h1 class="wow fadeInUp" data-wow-delay="0.4s">Hello, we are comila</h1>
           			<h3 class="wow fadeInUp" data-wow-delay="0.6s">We are almost <strong>ready to launch</strong> our <strong>new creative</strong> website!</h3>
           			<a href="http://127.0.0.1:8080/data/customer" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="0.8s">Customer</a>
-        			<a href="http://127.0.0.1:8080/data/login2" data-toggle="modal"  class="btn btn-lg btn-success smoothScroll wow fadeInUp" data-wow-delay="1.0s">Manager</a>
+        			<a href="http://127.0.0.1:8080/data/login" data-toggle="modal"  class="btn btn-lg btn-success smoothScroll wow fadeInUp" data-wow-delay="1.0s">Manager</a>
 				</div>
 			</div>
 		</div>

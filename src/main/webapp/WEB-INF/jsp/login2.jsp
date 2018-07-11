@@ -33,7 +33,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				<h2>Sign In</h2>
 			</div>
 			<div class="sub-main-w3">	
-				<form action="http://127.0.0.1:8080/data/manager/managerIndex" method="post">
+				<form action="http://127.0.0.1:8080/data/loginIn" method="post">
 					
 					<div class="icon1">
 						<i>userName</i>

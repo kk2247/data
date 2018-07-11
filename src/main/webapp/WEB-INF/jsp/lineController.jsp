@@ -8,13 +8,7 @@
 
 <head>
     <%
-        String userName="";
-        Cookie[] cookies=request.getCookies();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("account")){
-                userName=cookie.getValue();
-            }
-        }
+        Manager manager= (Manager) request.getAttribute("user");
         List<ScenicSpot> scenicSpots= (List<ScenicSpot>) request.getAttribute("scenic");
     %>
     <meta charset="utf-8" />
@@ -37,12 +31,12 @@
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Hello!<%=userName%></span>
+                    <span class="sr-only">Hello!<%=manager.getUserName()%></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=userName%></a>
+                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=manager.getUserName()%></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -134,13 +128,9 @@
                         <td>${list.relax}</td>
                         <td>${list.toilet}</td>
                         <td>${list.introduce}</td>
-                        <td><a href="http://127.0.0.1:8080/data/delete/${list.id}"> delete</a></td>
-                        <td><a href="http://127.0.0.1:8080/data/change/${list.id}"> modify</a></td>
                     </tr>
+
                 </c:forEach>
-                <tr>
-                    <a href="http://127.0.0.1:8080/data/add">add</a>
-                </tr>
             </table>
 
         </div>

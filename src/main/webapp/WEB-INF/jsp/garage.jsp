@@ -40,7 +40,7 @@
 			</form>
 
 			<div class="clear"></div>
-		</div><div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
+		</div><div class="copyrights">Collect from</div>
 		<div class="register w3layouts agileits">
 			<h2>当前信息</h2>
 			<h2 >剩余车位：</h2>

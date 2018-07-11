@@ -18,17 +18,28 @@ public class GarageServiceImpl implements GarageService {
     //车的数量
     private int numberOfCar=50;
 
-    @Autowired
     private CarDao carDao;
 
-    private Garage garage=new Garage();
+    private Garage garage;
 
-    @Override
-    public void createGarage(){
+    @Autowired
+    public GarageServiceImpl(CarDao carDao){
+        this.carDao=carDao;
+        garage=new Garage();
         List<Car> cars=carDao.getCars();
         for(Car car:cars){
             garage.getCarStack().add(car);
         }
+    }
+
+    @Override
+    public Garage createGarage(){
+        Garage garage1=new Garage();
+        List<Car> cars=carDao.getCars();
+        for(Car car:cars){
+            garage1.getCarStack().add(car);
+        }
+        return garage1;
     }
 
     @Override
