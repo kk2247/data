@@ -2,11 +2,15 @@
 <%@ page import="com.kyka.data.entity.Manager" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.kyka.data.entity.ScenicSpot" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+    <%
+        ArrayList<ScenicSpot> scenicSpot= (ArrayList<ScenicSpot>) request.getAttribute("scenicSpots");
+    %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manager controller</title>
@@ -24,7 +28,6 @@
 
 <body>
 <a href="http://127.0.0.1:8080/data/index">index</a>
-
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -86,31 +89,44 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <form action="http://127.0.0.1:8080/data/addScenic" method="post">
+            <form action="http://127.0.0.1:8080/data/addline" method="post">
                 <table style="border: white">
                     <tr>
-                        <td>name</td>
-                        <td>population</td>
-                        <td>relax</td>
-                        <td>toilet</td>
-                        <td>introduce</td>
+                        <td>side_name1</td>
+                        <td>side_name2</td>
+                        <td>length</td>
+                        <td>time</td>
                     </tr>
                     <tr>
-                        <td><input  type="text" name="name" value="name"/></td>
-                        <td><input type="number" name="welcome"  value="0"/></td>
                         <td>
-                            <select name="relax">
-                                <option value="true">true</option>
-                                <option value="false">false</option>
+                            <select name="sideName1">
+                                <%
+                                    if(scenicSpot!=null){
+                                    for(ScenicSpot scenicSpot1:scenicSpot){
+                                        %>
+                                <option value="<%=scenicSpot1.getName()%>"><%=scenicSpot1.getName()%></option>
+                                <%
+                                    }
+                                    }
+                                %>
                             </select>
                         </td>
+                        <%--<td><input  type="text" name="sideName1"/></td>--%>
                         <td>
-                            <select name="toilet">
-                                <option value="true">true</option>
-                                <option value="false">false</option>
+                            <select name="sideName2">
+                                <%
+                                    if(scenicSpot!=null){
+                                    for(ScenicSpot scenicSpot1:scenicSpot){
+                                %>
+                                <option value="<%=scenicSpot1.getName()%>"><%=scenicSpot1.getName()%></option>
+                                <%
+                                    }
+                                    }
+                                %>
                             </select>
                         </td>
-                        <td><input type="text" name="introduce" value="introduce"/></td>
+                        <td><input  type="number" name="length" value="0"/></td>
+                        <td><input  type="number" name="time"  value="0"/></td>
                     </tr>
                     <tr><button type="submit">submit</button></tr>
                 </table>

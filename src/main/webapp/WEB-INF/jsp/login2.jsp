@@ -20,6 +20,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //web-fonts -->
 </head>
 <body>
+<a href="http://127.0.0.1:8080/data/index">index</a>
+
 <div data-vide-bg="http://127.0.0.1:8080/data/login2video/video2">
 	<div class="center-container">
 		<!--header-->

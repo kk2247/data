@@ -27,6 +27,12 @@
         where id=#{id}
     </delete>
 
+    <delete id="deleteLineByName">
+        delete from
+        line
+        where side_name1=#{name} or side_name2=#{name}
+    </delete>
+
     <update id="modifyLine" parameterType="com.kyka.data.entity.Line">
         update line
         <set>

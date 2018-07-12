@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kyka.data.dao.NoticeDao">
+    <select id="getNotices" resultType="com.kyka.data.entity.Notice">
+        select content,date
+        from notice
+        order  by date desc
+    </select>
+
+    <insert id="insertNotice" parameterType="com.kyka.data.entity.Notice">
+        insert into notice
+        (content,date)
+        values
+        (#{content},#{date})
+    </insert>
+</mapper>

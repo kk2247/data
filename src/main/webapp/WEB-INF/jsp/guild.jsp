@@ -1,14 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.kyka.data.entity.ScenicSpot" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.kyka.data.entity.Line" %>
+<%@ page import="com.kyka.data.entity.ScenicSpot" %>
 <%@ page import="com.kyka.data.entity.Notice" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <%
-        ArrayList<ArrayList<Object>> way= (ArrayList<ArrayList<Object>>) request.getAttribute("way");
+        String result= (String) request.getAttribute("guildResult");
+        ArrayList<ScenicSpot> shortestWay= (ArrayList<ScenicSpot>) request.getAttribute("guild");
         Notice notice= (Notice) request.getAttribute("notice");
     %>
     <style type="text/css">
@@ -40,7 +40,7 @@
         }
     </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Customer</title>
+<title>Education</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://127.0.0.1:8080/data/css/templatemo_style.css" rel="stylesheet" type="text/css" />
@@ -50,15 +50,14 @@
 
 <div id="templatemo_header_wrapper">
     <div id="templatemo_header">
-    	<div id="site_title">
-        <h1><a href="#">
-            <img src="http://127.0.0.1:8080/data/customerimages/templatemo_logo.png" alt="Site Title" />
-            <span>welcome</span>
-        </a></h1>
-    </div>
+        <div id="site_title">
+            <h1><a href="#">
+                <img src="http://127.0.0.1:8080/data/customerimages/templatemo_logo.png" alt="Site Title" />
+                <span>welcome</span>
+            </a></h1>
+        </div>
         <p>Notice</p>
         <p><%=notice.getContent()%></p>
-    
     </div> <!-- end of templatemo_header -->
 
 </div> <!-- end of templatemo_menu_wrapper -->
@@ -77,32 +76,24 @@
 </div>
 
 <div id="templatemo_content_wrapper">
-    <table id="table-1">
-        <%
-            if(way!=null){
-            for(List<Object> list:way){
-                %>
-        <tr>
-        <%
-                for(Object object:list){
-                    if(object instanceof ScenicSpot){
-        %>
-        <td><h4 ><%=((ScenicSpot) object).getName()%></h4></td>
-        <%
-        }else{
-        %>
-        <td><h4><%=((Line)object).getLength()%></h4></td>
-        <%
-                    }
-                }
-                %>
-    </tr>
-        <%
-            }
-            }
-        %>
-    </table>
+    <form action="http://127.0.0.1:8080/data/short" method="post">
 
+        <table id="table-1">
+        <%
+            if(result.equals("true")){
+            if(shortestWay!=null){
+                for(ScenicSpot scenicSpot:shortestWay){
+                    %>
+            <tr>
+                <td><h4>pass</h4></td>
+                <td><h4><%=scenicSpot.getName()%></h4></td>
+            </tr>
+            <%
+                }
+            }}
+        %>
+        </table>
+    </form>
 </div>
 
 <div id="templatemo_footer_wrapper">

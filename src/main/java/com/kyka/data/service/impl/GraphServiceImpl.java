@@ -14,16 +14,44 @@ import java.util.List;
 @Service
 public class GraphServiceImpl implements GraphService {
 
-    @Autowired
     private LineDao lineDao;
 
-    @Autowired
     private ScenicSpotDao scenicSpotDao;
 
     private ArrayList<ArrayList<Object>> graph;
 
-    public GraphServiceImpl(){
-        graph = new ArrayList<ArrayList<Object>>();
+    @Autowired
+    public GraphServiceImpl(LineDao lineDao,ScenicSpotDao scenicSpotDao){
+        this.lineDao=lineDao;
+        this.scenicSpotDao=scenicSpotDao;
+        graph=new ArrayList<ArrayList<Object>>();
+        List<ScenicSpot> scenicSpots=scenicSpotDao.getAllScenicSpot();
+        List<Line> lines=lineDao.getAllLine();
+        ArrayList<Object> list=new ArrayList<>();
+        list.add(new ScenicSpot(" "));
+        graph.add(list);
+        for(int i=1;i<=scenicSpots.size();i++){
+            graph.get(0).add(scenicSpots.get(i-1));
+            ArrayList<Object> list1=new ArrayList<>();
+            list1.add(scenicSpots.get(i-1));
+            graph.add(list1);
+        }
+        for(int i=1;i<graph.get(0).size();i++){
+            for(int j=1;j<graph.get(0).size();j++){
+                if(i==j){
+                    graph.get(j).add(new Line(0));
+                }else{
+                    graph.get(j).add(new Line(32767));
+                }
+            }
+        }
+        for(int i=0;i<lines.size();i++) {
+            int place1 = searchForName(lines.get(i).getSideName1());
+            int place2 = searchForName(lines.get(i).getSideName2());
+            int distance=lines.get(i).getLength();
+            graph.get(place1).set(place2, lines.get(i));
+            graph.get(place2).set(place1, lines.get(i));
+        }
 
     }
 
@@ -32,6 +60,7 @@ public class GraphServiceImpl implements GraphService {
         List<ScenicSpot> scenicSpots=scenicSpotDao.getAllScenicSpot();
         List<Line> lines=lineDao.getAllLine();
         ArrayList<Object> list=new ArrayList<>();
+        graph=new ArrayList<ArrayList<Object>>();
         list.add(new ScenicSpot(" "));
         graph.add(list);
         for(int i=1;i<=scenicSpots.size();i++){
@@ -75,17 +104,8 @@ public class GraphServiceImpl implements GraphService {
      * 将链表中的内容输出
      */
     @Override
-    public void outPutGraph(){
-        for(int i=0;i<graph.size();i++){
-            for(int j=0;j<graph.size();j++){
-                if(graph.get(i).get(j) instanceof ScenicSpot){
-                    System.out.print(((ScenicSpot) graph.get(i).get(j)).getName()+"  ");
-                }else if(graph.get(i).get(j) instanceof Line){
-                    System.out.print(((Line) graph.get(i).get(j)).getLength()+"  ");
-                }
-            }
-            System.out.println("  ");
-        }
+    public ArrayList<ArrayList<Object>> outPutGraph(){
+        return graph;
     }
 
     /**
@@ -96,6 +116,7 @@ public class GraphServiceImpl implements GraphService {
      */
     @Override
     public ArrayList<Line> showShortestWay(String start, String end) {
+        createGraph();
         ArrayList<ArrayList<Object>>map= (ArrayList<ArrayList<Object>>) graph.clone();
         ArrayList<Line> lines=new ArrayList<>();
         int startIndex=searchForName(start);
@@ -157,8 +178,16 @@ public class GraphServiceImpl implements GraphService {
         return scenicSpotDao.getScenicSpotByDescription(description);
     }
 
+    /**
+     * 找到导游最短路径的点
+     * @return
+     */
     @Override
     public ArrayList<ScenicSpot> getShortestWayFromGate(){
+        createGraph();
+        if(graph.size()==0){
+            return null;
+        }
         ArrayList<ArrayList<Object>>map= (ArrayList<ArrayList<Object>>) graph.clone();
         ArrayList<ScenicSpot> lines=new ArrayList<>();
         BinaryTree binaryTree=new BinaryTree();

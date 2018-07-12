@@ -2,11 +2,15 @@
 <%@ page import="com.kyka.data.entity.Manager" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.kyka.data.entity.ScenicSpot" %>
+<%@ page import="com.kyka.data.entity.Line" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+    <%
+        Line line= (Line) request.getAttribute("line");
+    %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manager controller</title>
@@ -86,31 +90,20 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <form action="http://127.0.0.1:8080/data/addScenic" method="post">
+            <form action="http://127.0.0.1:8080/data/modifyl" method="post">
                 <table style="border: white">
                     <tr>
-                        <td>name</td>
-                        <td>population</td>
-                        <td>relax</td>
-                        <td>toilet</td>
-                        <td>introduce</td>
+                        <td>side_name1</td>
+                        <td>side_name2</td>
+                        <td>length</td>
+                        <td>time</td>
                     </tr>
                     <tr>
-                        <td><input  type="text" name="name" value="name"/></td>
-                        <td><input type="number" name="welcome"  value="0"/></td>
-                        <td>
-                            <select name="relax">
-                                <option value="true">true</option>
-                                <option value="false">false</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select name="toilet">
-                                <option value="true">true</option>
-                                <option value="false">false</option>
-                            </select>
-                        </td>
-                        <td><input type="text" name="introduce" value="introduce"/></td>
+                        <input name="id" style="display: none" value=${line.id}>
+                        <td><input name="sideName1" value=${line.sideName1}></td>
+                        <td><input name="sideName2" value=${line.sideName2}></td>
+                        <td><input name="length" value=${line.length}></td>
+                        <td><input name="time" value=${line.time}></td>
                     </tr>
                     <tr><button type="submit">submit</button></tr>
                 </table>

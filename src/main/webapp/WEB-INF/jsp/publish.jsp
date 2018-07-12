@@ -8,8 +8,13 @@
 
 <head>
     <%
-        Manager manager= (Manager) request.getAttribute("user");
-        List<ScenicSpot> scenicSpots= (List<ScenicSpot>) request.getAttribute("scenic");
+        String userName="";
+        Cookie[] cookies=request.getCookies();
+        for(Cookie cookie:cookies){
+            if(cookie.getName().equals("account")){
+                userName=cookie.getValue();
+            }
+        }
     %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,16 +32,18 @@
 </head>
 
 <body>
+<a href="http://127.0.0.1:8080/data/index">index</a>
+
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Hello!<%=manager.getUserName()%></span>
+                    <span class="sr-only">Hello!<%=userName%></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=manager.getUserName()%></a>
+                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=userName%></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -98,13 +105,13 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="managerIndex.jsp"><i class="fa fa-dashboard"></i>Scenic Spot</a>
+                        <a class="active-menu" href="http://127.0.0.1:8080/data/managerIndex"><i class="fa fa-dashboard"></i>Scenic Spot</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> Line</a>
+                        <a href="http://127.0.0.1:8080/data/lineController"><i class="fa fa-desktop"></i> Line</a>
                     </li>
-					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i>Publish</a>
+                    <li>
+                        <a href="http://127.0.0.1:8080/data/publish"><i class="fa fa-bar-chart-o"></i>Publish</a>
                     </li>
                 </ul>
 
@@ -113,26 +120,10 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <table style="border: white">
-                <tr>
-                    <td>name</td>
-                    <td>population</td>
-                    <td>relax</td>
-                    <td>toilet</td>
-                    <td>introduce</td>
-                </tr>
-                <c:forEach items="${scenic}" var="list">
-                    <tr>
-                        <td>${list.name}</td>
-                        <td>${list.welcome}</td>
-                        <td>${list.relax}</td>
-                        <td>${list.toilet}</td>
-                        <td>${list.introduce}</td>
-                    </tr>
-
-                </c:forEach>
-            </table>
-
+            <form action="http://127.0.0.1:8080/data/content" method="post">
+                <textarea name="content">content</textarea>
+                <button type="submit">submit</button>
+            </form>
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>

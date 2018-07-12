@@ -9,4 +9,7 @@ public interface CarDao {
     int getOut(int id);
     List<Car> getWaitingCars();
     List<Car> getCars();
+    int waiting(int id);
+    int enter(int id);
+    Car getCar(String licenseNum);
 }

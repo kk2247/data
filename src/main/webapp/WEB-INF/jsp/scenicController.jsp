@@ -26,6 +26,8 @@
 </head>
 
 <body>
+<a href="http://127.0.0.1:8080/data/index">index</a>
+
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -72,13 +74,13 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="managerIndex.jsp"><i class="fa fa-dashboard"></i>Scenic Spot</a>
+                        <a class="active-menu" href="http://127.0.0.1:8080/data/managerIndex"><i class="fa fa-dashboard"></i>Scenic Spot</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> Line</a>
+                        <a href="http://127.0.0.1:8080/data/lineController"><i class="fa fa-desktop"></i> Line</a>
                     </li>
-					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i>Publish</a>
+                    <li>
+                        <a href="http://127.0.0.1:8080/data/publish"><i class="fa fa-bar-chart-o"></i>Publish</a>
                     </li>
                 </ul>
 
@@ -87,7 +89,7 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <form action="managerIndex">
+            <form action="http://127.0.0.1:8080/data/modifyScenic" method="post">
                 <table style="border: white">
                     <tr>
                         <td>name</td>
@@ -97,11 +99,12 @@
                         <td>introduce</td>
                     </tr>
                     <tr>
-                        <td><input value=${scenic.name}></td>
-                        <td><input value=${scenic.welcome}></td>
-                        <td><input value=${scenic.relax}></td>
-                        <td><input value=${scenic.toilet}></td>
-                        <td><input value=${scenic.introduce}></td>
+                        <input name="id" style="display: none" value=${scenic.id}>
+                        <td><input name="name" value=${scenic.name}></td>
+                        <td><input name="welcome" value=${scenic.welcome}></td>
+                        <td><input name="relax" value=${scenic.relax}></td>
+                        <td><input name="toilet" value=${scenic.toilet}></td>
+                        <td><input name="introduce" value=${scenic.introduce}></td>
                     </tr>
                     <tr><button type="submit">submit</button></tr>
                 </table>

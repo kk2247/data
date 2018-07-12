@@ -9,7 +9,7 @@ import java.util.List;
 public interface GraphService {
     void createGraph();
     int searchForName(String name);
-    void outPutGraph();
+    ArrayList<ArrayList<Object>> outPutGraph();
     ArrayList<Line> showShortestWay(String start, String end);
     List<ScenicSpot> getScenicSpotByPopulation();
     List<ScenicSpot> getScenicSpotByDescription(String description);

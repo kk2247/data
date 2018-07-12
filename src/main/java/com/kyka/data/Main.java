@@ -4,8 +4,8 @@ import com.kyka.data.service.impl.GraphServiceImpl;
 
 public class Main {
     public static void main(String[] args){
-        GraphServiceImpl graphService=new GraphServiceImpl();
-        graphService.createGraph();
-        graphService.outPutGraph();
+//        GraphServiceImpl graphService=new GraphServiceImpl();
+//        graphService.createGraph();
+//        graphService.outPutGraph();
     }
 }

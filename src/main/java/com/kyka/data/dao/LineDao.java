@@ -10,5 +10,6 @@ public interface LineDao {
     Line getLineById(int id);
     int insertLine(Line line);
     int deleteLine(int id);
+    int deleteLineByName(String name);
     int modifyLine(Line line);
 }

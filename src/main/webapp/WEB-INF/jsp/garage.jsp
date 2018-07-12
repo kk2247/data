@@ -1,3 +1,6 @@
+<%@ page import="com.kyka.data.entity.Car" %>
+<%@ page import="javafx.concurrent.Task" %>
+<%@ page import="java.util.*" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,6 +9,7 @@
 <head>
 	<%
 		int size= (int) request.getAttribute("number");
+		List<Car> cars= (List<Car>) request.getAttribute("cars");
 	%>
 	<title>停车场登记</title>
 
@@ -25,6 +29,7 @@
 
 <!-- Body -->
 <body>
+<a href="http://127.0.0.1:8080/data/index">index</a>
 
 	<h1>停车场登记</h1>
 
@@ -37,6 +42,25 @@
 				<div class="send-button w3layouts agileits">
 					<input type="submit" value="登 记">
 				</div>
+			</form>
+			<form action="http://127.0.0.1:8080/data/getout" method="post">
+				<select  name="licenseNum" >
+					<%
+						if(cars!=null){
+							if(cars.size()!=0){
+						for(Car car:cars){
+					%>
+					<option value="<%=car.getLicenseNum()%>"><%=car.getLicenseNum()%></option>
+					<%
+						}
+					%>
+				</select>
+				<div class="send-button w3layouts agileits">
+					<input type="submit" value="退 出">
+				</div>
+				<%
+						}}
+				%>
 			</form>
 
 			<div class="clear"></div>
@@ -62,7 +86,20 @@
 		</div>
 
 		<div class="clear"></div>
-
+<%
+	String str= (String) request.getAttribute("result");
+	if(str!=null){
+	if(str.equals("true")){
+	    %>
+		<img src="http://127.0.0.1:8080/data/garageimages/1a8b889117dfb1833319014b314e6b7f.gif">
+		<%
+	}else{
+		%>
+		<img src="http://127.0.0.1:8080/data/garageimages/fb5eca2195a14242aa980bf20bff97cf_afb49a529822720e909d3d6371cb0a46f31fab98.png">
+		<%
+	}
+			}
+%>
 	</div>
 
 </body>

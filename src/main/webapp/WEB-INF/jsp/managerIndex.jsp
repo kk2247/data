@@ -2,6 +2,8 @@
 <%@ page import="com.kyka.data.entity.Manager" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.kyka.data.entity.ScenicSpot" %>
+<%@ page import="com.kyka.data.entity.Line" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,11 +17,40 @@
                 userName=cookie.getValue();
             }
         }
-        List<ScenicSpot> scenicSpots= (List<ScenicSpot>) request.getAttribute("scenic");
+        List<ScenicSpot> scenic= (List<ScenicSpot>) request.getAttribute("scenic");
+        ArrayList<ArrayList<Object>> way= (ArrayList<ArrayList<Object>>) request.getAttribute("way");
     %>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manager controller</title>
+    <style type="text/css">
+        #table-1 thead, #table-1 tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(230, 189, 189);
+        }
+        #table-1 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(230, 189, 189);
+        }
+
+        /* Padding and font style */
+        #table-1 td, #table-1 th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: rgb(177, 106, 104);
+        }
+
+        /* Alternating background colors */
+        #table-1 tr:nth-child(even) {
+            background: #adadad;
+        }
+        #table-1 tr:nth-child(odd) {
+            background: #FFF
+        }
+    </style>
     <!-- Bootstrap Styles-->
     <link href="http://127.0.0.1:8080/data/managercss/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -33,6 +64,8 @@
 </head>
 
 <body>
+<a href="http://127.0.0.1:8080/data/index">index</a>
+
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -104,13 +137,13 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="managerIndex.jsp"><i class="fa fa-dashboard"></i>Scenic Spot</a>
+                        <a class="active-menu" href="http://127.0.0.1:8080/data/managerIndex"><i class="fa fa-dashboard"></i>Scenic Spot</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> Line</a>
+                        <a href="http://127.0.0.1:8080/data/lineController"><i class="fa fa-desktop"></i> Line</a>
                     </li>
 					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i>Publish</a>
+                        <a href="http://127.0.0.1:8080/data/publish"><i class="fa fa-bar-chart-o"></i>Publish</a>
                     </li>
                 </ul>
 
@@ -119,7 +152,7 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <table style="border: white">
+            <table id="table-1">
                 <tr>
                     <td>name</td>
                     <td>population</td>
@@ -138,9 +171,31 @@
                         <td><a href="http://127.0.0.1:8080/data/change/${list.id}"> modify</a></td>
                     </tr>
                 </c:forEach>
+
+            </table>
+            <a href="http://127.0.0.1:8080/data/add">add</a>
+            <table id="table-1">
+                <%
+                    for(List<Object> list:way){
+                %>
                 <tr>
-                    <a href="http://127.0.0.1:8080/data/add">add</a>
+                    <%
+                        for(Object object:list){
+                            if(object instanceof ScenicSpot){
+                    %>
+                    <td><h4 style="color: brown"><%=((ScenicSpot) object).getName()%></h4></td>
+                    <%
+                    }else{
+                    %>
+                    <td><h4 style="color: brown"><%=((Line)object).getLength()%></h4></td>
+                    <%
+                            }
+                        }
+                    %>
                 </tr>
+                <%
+                    }
+                %>
             </table>
 
         </div>

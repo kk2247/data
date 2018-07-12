@@ -2,15 +2,50 @@
 <%@ page import="com.kyka.data.entity.Manager" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.kyka.data.entity.ScenicSpot" %>
+<%@ page import="com.kyka.data.entity.Line" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <%
-        Manager manager= (Manager) request.getAttribute("user");
-        List<ScenicSpot> scenicSpots= (List<ScenicSpot>) request.getAttribute("scenic");
+        String userName="";
+        Cookie[] cookies=request.getCookies();
+        for(Cookie cookie:cookies){
+            if(cookie.getName().equals("account")){
+                userName=cookie.getValue();
+            }
+        }
+        List<Line> lines= (List<Line>) request.getAttribute("lines");
     %>
+    <style type="text/css">
+        #table-1 thead, #table-1 tr {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: rgb(230, 189, 189);
+        }
+        #table-1 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgb(230, 189, 189);
+        }
+
+        /* Padding and font style */
+        #table-1 td, #table-1 th {
+            padding: 5px 10px;
+            font-size: 12px;
+            font-family: Verdana;
+            color: rgb(177, 106, 104);
+        }
+
+        /* Alternating background colors */
+        #table-1 tr:nth-child(even) {
+            background: #adadad;
+        }
+        #table-1 tr:nth-child(odd) {
+            background: #FFF
+        }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manager controller</title>
@@ -27,16 +62,18 @@
 </head>
 
 <body>
+<a href="http://127.0.0.1:8080/data/index">index</a>
+
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Hello!<%=manager.getUserName()%></span>
+                    <span class="sr-only">Hello!<%=userName%></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=manager.getUserName()%></a>
+                <a class="navbar-brand" href="managerIndex.jsp">Hello!<%=userName%></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -98,13 +135,13 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="managerIndex.jsp"><i class="fa fa-dashboard"></i>Scenic Spot</a>
+                        <a class="active-menu" href="http://127.0.0.1:8080/data/managerIndex"><i class="fa fa-dashboard"></i>Scenic Spot</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> Line</a>
+                        <a href="http://127.0.0.1:8080/data/lineController"><i class="fa fa-desktop"></i> Line</a>
                     </li>
-					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i>Publish</a>
+                    <li>
+                        <a href="http://127.0.0.1:8080/data/publish"><i class="fa fa-bar-chart-o"></i>Publish</a>
                     </li>
                 </ul>
 
@@ -113,26 +150,26 @@
         <!-- /. NAV SIDE  -->
 
         <div id="page-wrapper">
-            <table style="border: white">
+            <table id="table-1">
                 <tr>
-                    <td>name</td>
-                    <td>population</td>
-                    <td>relax</td>
-                    <td>toilet</td>
-                    <td>introduce</td>
+                    <td>side_name1</td>
+                    <td>side_name2</td>
+                    <td>length</td>
+                    <td>time</td>
                 </tr>
-                <c:forEach items="${scenic}" var="list">
+                <c:forEach items="${lines}" var="line">
                     <tr>
-                        <td>${list.name}</td>
-                        <td>${list.welcome}</td>
-                        <td>${list.relax}</td>
-                        <td>${list.toilet}</td>
-                        <td>${list.introduce}</td>
+                        <td>${line.sideName1}</td>
+                        <td>${line.sideName2}</td>
+                        <td>${line.length}</td>
+                        <td>${line.time}</td>
+                        <td><a href="http://127.0.0.1:8080/data/deleteline/${line.id}"> delete</a></td>
+                        <td><a href="http://127.0.0.1:8080/data/changeline/${line.id}"> modify</a></td>
                     </tr>
 
                 </c:forEach>
             </table>
-
+            <a href="http://127.0.0.1:8080/data/addl">add</a>
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>
